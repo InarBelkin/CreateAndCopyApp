@@ -19,6 +19,7 @@ module.exports = {
     'class-methods-use-this': 'off',
     'react/function-component-definition': 'off',
     'no-return-await': 'off',
+    'react/jsx-props-no-spreading': 'off',
   },
   parserOptions: {
     ecmaVersion: 2022,

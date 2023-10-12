@@ -1,55 +1,36 @@
 export class LoadSuccess<T> {
-  public get discriminator(): 'success' {
-    return 'success';
-  }
+  readonly discriminator = 'success';
 
-  #value: T;
-
-  public get value() {
-    return this.#value;
-  }
+  readonly value: T;
 
   constructor(value: T) {
-    this.#value = value;
+    this.value = value;
   }
 }
 
 export class LoadLoading<T> {
-  public get discriminator(): 'loading' {
-    return 'loading';
-  }
+  readonly discriminator = 'loading';
 
-  #value?: T;
-
-  public get value() {
-    return this.#value;
-  }
+  readonly value?: T;
 
   constructor(value?: T) {
-    this.#value = value;
+    this.value = value;
   }
 }
 
 export class LoadError<T> {
-  public get discriminator(): 'error' {
-    return 'error';
-  }
+  readonly discriminator = 'error';
 
-  #value?: T;
+  readonly value?: T;
 
-  public get value() {
-    return this.#value;
-  }
+  readonly error: Error;
 
-  #error: Error;
+  readonly message?: string;
 
-  public get error() {
-    return this.#error;
-  }
-
-  constructor(error: Error, value?: T) {
-    this.#value = value;
-    this.#error = error;
+  constructor(error: Error, message?: string, value?: T) {
+    this.value = value;
+    this.error = error;
+    this.message = message;
   }
 }
 

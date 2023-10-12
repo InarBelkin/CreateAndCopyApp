@@ -2,11 +2,13 @@ import fs from 'fs/promises';
 import path from 'path';
 import { LoadError, LoadSuccess, ResultHolder } from '../API/ResultHolder';
 
+export type CompareAccuracy = 'names' | 'size' | 'content';
+
 export interface StartReplaceRequest {
   pathFrom: string;
   pathTo: string;
   folderNames: string[];
-  compareAccuracy: 'names' | 'size' | 'content';
+  compareAccuracy: CompareAccuracy;
 }
 
 export interface startReplaceResult {
@@ -35,6 +37,7 @@ export class ReplacerApi {
 
       return new LoadSuccess('Files are up to date');
     } catch (e) {
+      console.log('error', e);
       return new LoadError(e as Error);
     }
   }

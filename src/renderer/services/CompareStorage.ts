@@ -1,11 +1,14 @@
 import { makeAutoObservable } from 'mobx';
 import replacerApiCaller from './ReplacerApiCaller';
 import { LoadLoading, ValueHolder } from '../../main/API/ResultHolder';
+import { CompareAccuracy } from '../../main/ReplacerApi/ReplacerApi';
 
 class CompareStorage {
   pathFrom: string | null = null;
 
   pathTo: string | null = null;
+
+  compareAccuracy: CompareAccuracy = 'names';
 
   constructor() {
     makeAutoObservable(this);
@@ -20,7 +23,7 @@ class CompareStorage {
         pathFrom: this.pathFrom,
         pathTo: this.pathTo,
         folderNames: [],
-        compareFilesContent: false,
+        compareAccuracy: this.compareAccuracy,
       });
     }
   }
