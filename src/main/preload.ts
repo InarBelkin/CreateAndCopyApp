@@ -2,6 +2,7 @@
 /* eslint no-unused-vars: off */
 import { contextBridge, ipcRenderer, IpcRendererEvent } from 'electron';
 import { ReplacerApi } from './ReplacerApi/ReplacerApi';
+import { ReplacerHelper } from './ReplacerApi/ReplacerHelper';
 
 export type Channels = 'ipc-example';
 
@@ -29,11 +30,20 @@ contextBridge.exposeInMainWorld('electron', electronHandler);
 
 const replacerApiHandler = {
   invoke(name: keyof ReplacerApi, ...args: unknown[]) {
-    return ipcRenderer.invoke(name, ...args);
+    return ipcRenderer.invoke(`replacer_${name}`, ...args);
   },
 };
 
 contextBridge.exposeInMainWorld('replacer', replacerApiHandler);
 
+const replacerHelperHandler = {
+  invoke(name: keyof ReplacerHelper, ...args: unknown[]) {
+    return ipcRenderer.invoke(`replacerHelper_${name}`, ...args);
+  },
+};
+
+contextBridge.exposeInMainWorld('replacerHelper', replacerHelperHandler);
+
 export type ReplacerApiHandler = typeof replacerApiHandler;
 export type ElectronHandler = typeof electronHandler;
+export type ReplacerHelperHandler = typeof replacerHelperHandler;

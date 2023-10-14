@@ -20,6 +20,7 @@ module.exports = {
     'react/function-component-definition': 'off',
     'no-return-await': 'off',
     'react/jsx-props-no-spreading': 'off',
+    'no-empty': 'off',
   },
   parserOptions: {
     ecmaVersion: 2022,

@@ -1,11 +1,18 @@
+// eslint-disable-next-line import/no-duplicates
 import 'webpack-dev-server';
+// @ts-ignore
 import path from 'path';
+// @ts-ignore
 import fs from 'fs';
+// @ts-ignore
 import webpack from 'webpack';
+// @ts-ignore
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+// @ts-ignore
 import chalk from 'chalk';
 import { merge } from 'webpack-merge';
 import { execSync, spawn } from 'child_process';
+// @ts-ignore
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import baseConfig from './webpack.config.base';
 import webpackPaths from './webpack.paths';
@@ -69,7 +76,7 @@ const configuration: webpack.Configuration = {
           {
             loader: 'css-loader',
             options: {
-              modules: true,
+              modules: { localIdentName: '[name]__[local]--[hash:base64:5]' },
               sourceMap: true,
               importLoaders: 1,
             },
@@ -193,6 +200,7 @@ const configuration: webpack.Configuration = {
       let args = ['run', 'start:main'];
       if (process.env.MAIN_ARGS) {
         args = args.concat(
+          // @ts-ignore
           ['--', ...process.env.MAIN_ARGS.matchAll(/"[^"]+"|[^\s"]+/g)].flat(),
         );
       }
